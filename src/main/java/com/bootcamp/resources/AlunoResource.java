@@ -28,7 +28,7 @@ public class AlunoResource {
 	@Autowired
 	private AlunoService alunoService;
 
-	@Autowired
+
 
 	// ----------------------------------------------------------------------------
 	@GetMapping(value = "/{id}")
@@ -71,6 +71,7 @@ public class AlunoResource {
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		try {
 			alunoService.delete(id);
+			
 		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException(id);
 			

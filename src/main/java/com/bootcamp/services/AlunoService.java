@@ -19,22 +19,27 @@ public class AlunoService {
 	@Autowired
 	private AlunoRepository alunoRepository;
 	
-	
+	//----------------------------------------------------------------------------
 	public Aluno findById(Long id) {
 		//TIPO OPTIONAL ARMAZENA O OBJ
 		Optional<Aluno> obj = alunoRepository.findById(id);
 		//RETORNA O OBJ
 		return obj.orElseThrow(()-> new ResourceNotFoundException(id));
 	}
-	
+	//----------------------------------------------------------------------------
 	public List<Aluno> findAll(){
 		return alunoRepository.findAll();
 	}
 	
+	
+	//----------------------------------------------------------------------------
 	public Aluno insert(Aluno aluno){
 		return alunoRepository.save(aluno);
+		
 	}
 	
+	
+	//----------------------------------------------------------------------------
 	public void delete(Long id) {
 		try {
 			alunoRepository.deleteById(id);
@@ -48,6 +53,8 @@ public class AlunoService {
 		}
 	}
 	
+	
+	//----------------------------------------------------------------------------
 	public Aluno update (Long id, Aluno obj) {
 		try {
 			
@@ -71,7 +78,7 @@ public class AlunoService {
 		entity.setDataDeNascimento(obj.getDataDeNascimento());
 				
 	}
-	
+	//----------------------------------------------------------------------------
 	
 	
 	
