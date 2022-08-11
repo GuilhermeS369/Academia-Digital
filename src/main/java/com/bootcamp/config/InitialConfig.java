@@ -72,8 +72,8 @@ public class InitialConfig implements CommandLineRunner {
 		
 		AvaliacaoFisica avaliacao1 = new AvaliacaoFisica(null, aluno1 , LocalDateTime.of(2022, 5, 13, 11, 23),	100.0,	1.80);
 		AvaliacaoFisica avaliacao2 = new AvaliacaoFisica(null, aluno1 , LocalDateTime.of(2022, 2, 25, 12, 00),	95.0,	1.82);
-		AvaliacaoFisica avaliacao3 = new AvaliacaoFisica(null, aluno1 , LocalDateTime.of(2022, 6, 8, 14, 00),	70.0,	1.60);
-		AvaliacaoFisica avaliacao4 = new AvaliacaoFisica(null, aluno1 , LocalDateTime.of(2022, 4, 11, 15, 50),	75.0,	1.70);
+		AvaliacaoFisica avaliacao3 = new AvaliacaoFisica(null, aluno2 , LocalDateTime.of(2022, 6, 8, 14, 00),	70.0,	1.60);
+		AvaliacaoFisica avaliacao4 = new AvaliacaoFisica(null, aluno2 , LocalDateTime.of(2022, 4, 11, 15, 50),	75.0,	1.70);
 				
 		alunoRepo.saveAll(Arrays.asList(aluno1,aluno2));
 		matRepo.save(mat1);

@@ -10,6 +10,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.bootcamp.entities.Aluno;
 import com.bootcamp.entities.AvaliacaoFisica;
 import com.bootcamp.repositories.AvaliacaoFisicaRepository;
 import com.bootcamp.services.exceptions.DatabaseException;
@@ -19,6 +20,9 @@ import com.bootcamp.services.exceptions.ResourceNotFoundException;
 public class AvaliacaoFisicaService {
 	@Autowired
 	private AvaliacaoFisicaRepository avaliacaoFisicaRepository;
+	@Autowired
+	private AlunoService alunoServ;
+	
 	
 	//----------------------------------------------------------------------------
 	public AvaliacaoFisica findById(Long id) {
@@ -34,8 +38,17 @@ public class AvaliacaoFisicaService {
 	
 	
 	//----------------------------------------------------------------------------
-	public AvaliacaoFisica insert(AvaliacaoFisica avaliacaoFisica){
-		return avaliacaoFisicaRepository.save(avaliacaoFisica);
+	public AvaliacaoFisica insert(AvaliacaoFisica avaliacaoFisica, Long id){
+		
+		Aluno obj = alunoServ.findById(id);
+		avaliacaoFisica.setAluno(obj);
+		AvaliacaoFisica ava = avaliacaoFisicaRepository.save(avaliacaoFisica);
+		obj.getAvaliacoesFisica().add(ava);
+				
+		alunoServ.insert(obj);
+				
+		return ava;
+		
 		
 	}
 	

@@ -80,7 +80,6 @@ public class AlunoResource {
 			
 		}
 		
-
 		return ResponseEntity.noContent().build();
 
 	}
