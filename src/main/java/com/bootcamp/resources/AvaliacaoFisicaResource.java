@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -48,8 +49,9 @@ public class AvaliacaoFisicaResource {
 	}
 
 	// ----------------------------------------------------------------------------
-	@PostMapping(value = "/{id}")
-	public ResponseEntity<AvaliacaoFisica> insert(@PathVariable Long id, @RequestBody AvaliacaoFisica obj) {
+	@PostMapping
+	public ResponseEntity<AvaliacaoFisica> insert(@RequestParam(value="idAluno", defaultValue = "") Long id,
+			@RequestBody AvaliacaoFisica obj) {
 		obj = avaliacaoFisicaService.insert(obj, id);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -79,9 +81,7 @@ public class AvaliacaoFisicaResource {
 			throw new DatabaseException(e.getMessage());
 			
 		}
-		
-
 		return ResponseEntity.noContent().build();
-
 	}
+
 }

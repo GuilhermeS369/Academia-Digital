@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.bootcamp.entities.Aluno;
 import com.bootcamp.entities.Matricula;
+import com.bootcamp.entities.DTO.AlunoDTO;
 import com.bootcamp.repositories.AlunoRepository;
 import com.bootcamp.repositories.MatriculaRepository;
 import com.bootcamp.services.exceptions.DatabaseException;
@@ -23,7 +24,10 @@ public class AlunoService {
 	private AlunoRepository alunoRepository;
 	@Autowired
 	private MatriculaRepository matRepo;
-	
+
+	public AlunoService() {
+	}
+
 	//----------------------------------------------------------------------------
 	public Aluno findById(Long id) {
 		//TIPO OPTIONAL ARMAZENA O OBJ
@@ -38,21 +42,12 @@ public class AlunoService {
 	
 	
 	//----------------------------------------------------------------------------
-	public Aluno insert(Aluno aluno){
-		
-		Aluno alunoNew = alunoRepository.save(aluno);
-		
-		Matricula matricula = new Matricula(null, aluno, LocalDateTime.now());
-		
-		matRepo.save(matricula);
-		
-		alunoNew.setMatricula(matricula);
-		
-		alunoNew = alunoRepository.save(alunoNew);
-		
-		return alunoNew;
+	public Aluno insert(AlunoDTO aluno){
+
+		return alunoRepository.save(insertData(new Aluno(), aluno));
 		
 	}
+	
 	
 	
 	//----------------------------------------------------------------------------
@@ -93,6 +88,14 @@ public class AlunoService {
 		entity.setCpf(obj.getCpf());
 		entity.setDataDeNascimento(obj.getDataDeNascimento());
 				
+	}
+
+	private Aluno insertData(Aluno entity, AlunoDTO obj) {
+		entity.setName(obj.getName());
+		entity.setBairro(obj.getBairro());
+		entity.setCpf(obj.getCpf());
+		entity.setDataDeNascimento(obj.getDataDeNascimento());
+		return entity;
 	}
 	//----------------------------------------------------------------------------
 

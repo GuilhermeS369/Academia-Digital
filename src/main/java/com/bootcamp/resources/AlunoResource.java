@@ -3,6 +3,8 @@ package com.bootcamp.resources;
 import java.net.URI;
 import java.util.List;
 
+import com.bootcamp.entities.AvaliacaoFisica;
+import com.bootcamp.services.AvaliacaoFisicaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.bootcamp.entities.Aluno;
+import com.bootcamp.entities.DTO.AlunoDTO;
 import com.bootcamp.services.AlunoService;
 import com.bootcamp.services.exceptions.DatabaseException;
 import com.bootcamp.services.exceptions.ResourceNotFoundException;
@@ -27,6 +30,8 @@ import com.bootcamp.services.exceptions.ResourceNotFoundException;
 public class AlunoResource {
 	@Autowired
 	private AlunoService alunoService;
+	@Autowired
+	private AvaliacaoFisicaService avaliacaoFisicaService;
 
 
 
@@ -49,12 +54,12 @@ public class AlunoResource {
 
 	// ----------------------------------------------------------------------------
 	@PostMapping
-	public ResponseEntity<Aluno> insert(@RequestBody Aluno obj) {
-		obj = alunoService.insert(obj);
+	public ResponseEntity<Aluno> insert(@RequestBody AlunoDTO obj) {
+		Aluno aluno = alunoService.insert(obj);
 
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(aluno.getId()).toUri();
 
-		return ResponseEntity.created(uri).body(obj);
+		return ResponseEntity.created(uri).body(aluno);
 	}
 
 	// ----------------------------------------------------------------------------
@@ -79,9 +84,13 @@ public class AlunoResource {
 			throw new DatabaseException(e.getMessage());
 			
 		}
-		
-		return ResponseEntity.noContent().build();
+				return ResponseEntity.noContent().build();
 
+	}
+
+	@GetMapping("/avaliacoes/{id}")
+	public List<AvaliacaoFisica> getAllAvaliacaoFisica(@PathVariable Long id){
+		return avaliacaoFisicaService.getAllAvaliacaoFisica(id);
 	}
 
 }

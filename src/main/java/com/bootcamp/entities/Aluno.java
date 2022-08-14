@@ -5,28 +5,43 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.ToString;
 
 
+@ToString
 @Entity
+@Table(name = "tb_aluno")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Aluno {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String name;
+	@Column(unique = true)
 	private String cpf;
+	
 	private String bairro;
+	
 	private LocalDate dataDeNascimento;
-	@OneToMany(mappedBy = "aluno")
-		//private Set <OrderItem> items = new HashSet<>();
+	
+	@OneToMany(mappedBy = "aluno", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private List<AvaliacaoFisica> avaliacoesFisica = new ArrayList<>();
-	@OneToOne
-	private Matricula matricula;
+
 	
 	public Aluno() {
 		
@@ -34,6 +49,15 @@ public class Aluno {
 	public Aluno(Long id, String name, String cpf, String bairro, LocalDate dataDeNascimento) {
 		super();
 		this.id = id;
+		this.name = name;
+		this.cpf = cpf;
+		this.bairro = bairro;
+		this.dataDeNascimento = dataDeNascimento;
+		
+	}
+	
+	public Aluno (String name, String cpf, String bairro, LocalDate dataDeNascimento) {
+		
 		this.name = name;
 		this.cpf = cpf;
 		this.bairro = bairro;
@@ -79,17 +103,6 @@ public class Aluno {
 	}
 	
 	
-	
-	public Matricula getMatricula() {
-		return matricula;
-	}
-
-
-	public void setMatricula(Matricula matricula) {
-		this.matricula = matricula;
-	}
-
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -105,6 +118,8 @@ public class Aluno {
 		Aluno other = (Aluno) obj;
 		return Objects.equals(id, other.id);
 	}
+
+
 	
 
 	

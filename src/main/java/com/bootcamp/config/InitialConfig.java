@@ -62,29 +62,28 @@ public class InitialConfig implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
+//		
+//		Aluno aluno1 = new Aluno(null, "Guilherme", "123.456.789-99","Vila Noegueira", LocalDate.of(1999, 6, 22));
+//		Aluno aluno2 = new Aluno(null, "Gustavo", "987.456.789-99","Vila Noemi", LocalDate.of(2007, 5, 31));
+//		
+//		Matricula mat1 = new Matricula(null, aluno1, LocalDateTime.of(2018, 07, 22, 10, 15, 30));
 		
+//		AvaliacaoFisica avaliacao1 = new AvaliacaoFisica(null, aluno1 , LocalDateTime.of(2022, 5, 13, 11, 23),	100.0,	1.80);
+//		AvaliacaoFisica avaliacao2 = new AvaliacaoFisica(null, aluno1 , LocalDateTime.of(2022, 2, 25, 12, 00),	95.0,	1.82);
+//		AvaliacaoFisica avaliacao3 = new AvaliacaoFisica(null, aluno2 , LocalDateTime.of(2022, 6, 8, 14, 00),	70.0,	1.60);
+//		AvaliacaoFisica avaliacao4 = new AvaliacaoFisica(null, aluno2 , LocalDateTime.of(2022, 4, 11, 15, 50),	75.0,	1.70);
+//				
+//		alunoRepo.saveAll(Arrays.asList(aluno1,aluno2));
+//		matRepo.save(mat1);
+//		avaliacaoRepo.saveAll(Arrays.asList(avaliacao1, avaliacao2, avaliacao3, avaliacao4));
+//		
+//				
+//		aluno1.getAvaliacoesFisica().addAll(Arrays.asList(avaliacao1, avaliacao2));
+//		aluno2.getAvaliacoesFisica().addAll(Arrays.asList(avaliacao3, avaliacao4));
 		
+//		alunoRepo.saveAll(Arrays.asList(aluno1, aluno2));
 		
-		Aluno aluno1 = new Aluno(null, "Guilherme", "123.456.789-99","Vila Noegueira", LocalDate.of(1999, 6, 22));
-		Aluno aluno2 = new Aluno(null, "Gustavo", "987.456.789-99","Vila Noemi", LocalDate.of(2007, 5, 31));
-		
-		Matricula mat1 = new Matricula(null, aluno1, LocalDateTime.of(2018, 07, 22, 10, 15, 30));
-		
-		AvaliacaoFisica avaliacao1 = new AvaliacaoFisica(null, aluno1 , LocalDateTime.of(2022, 5, 13, 11, 23),	100.0,	1.80);
-		AvaliacaoFisica avaliacao2 = new AvaliacaoFisica(null, aluno1 , LocalDateTime.of(2022, 2, 25, 12, 00),	95.0,	1.82);
-		AvaliacaoFisica avaliacao3 = new AvaliacaoFisica(null, aluno2 , LocalDateTime.of(2022, 6, 8, 14, 00),	70.0,	1.60);
-		AvaliacaoFisica avaliacao4 = new AvaliacaoFisica(null, aluno2 , LocalDateTime.of(2022, 4, 11, 15, 50),	75.0,	1.70);
-				
-		alunoRepo.saveAll(Arrays.asList(aluno1,aluno2));
-		matRepo.save(mat1);
-		avaliacaoRepo.saveAll(Arrays.asList(avaliacao1, avaliacao2, avaliacao3, avaliacao4));
-		
-		
-		aluno1.setMatricula(mat1);
-		aluno1.getAvaliacoesFisica().addAll(Arrays.asList(avaliacao1, avaliacao2));
-		aluno2.getAvaliacoesFisica().addAll(Arrays.asList(avaliacao3, avaliacao4));
-		
-		alunoRepo.saveAll(Arrays.asList(aluno1, aluno2));
+	
 		
 	}
 	

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.bootcamp.entities.Aluno;
 import com.bootcamp.entities.AvaliacaoFisica;
+import com.bootcamp.repositories.AlunoRepository;
 import com.bootcamp.repositories.AvaliacaoFisicaRepository;
 import com.bootcamp.services.exceptions.DatabaseException;
 import com.bootcamp.services.exceptions.ResourceNotFoundException;
@@ -22,6 +23,8 @@ public class AvaliacaoFisicaService {
 	private AvaliacaoFisicaRepository avaliacaoFisicaRepository;
 	@Autowired
 	private AlunoService alunoServ;
+	@Autowired
+	private AlunoRepository alunoRepository;
 	
 	
 	//----------------------------------------------------------------------------
@@ -44,8 +47,8 @@ public class AvaliacaoFisicaService {
 		avaliacaoFisica.setAluno(obj);
 		AvaliacaoFisica ava = avaliacaoFisicaRepository.save(avaliacaoFisica);
 		obj.getAvaliacoesFisica().add(ava);
-				
-		alunoServ.insert(obj);
+			
+		alunoRepository.save(obj);
 				
 		return ava;
 		
@@ -90,6 +93,11 @@ public class AvaliacaoFisicaService {
 		entity.setPeso(obj.getPeso());
 		entity.setDataDaAvaliacao(obj.getDataDaAvaliacao());
 	
+	}
+
+	public List<AvaliacaoFisica> getAllAvaliacaoFisica(Long id) {
+		Optional<Aluno> aluno = alunoRepository.findById(id);
+		return aluno.get().getAvaliacoesFisica();
 	}
 	//----------------------------------------------------------------------------
 	
