@@ -9,14 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.bootcamp.entities.Aluno;
@@ -24,6 +17,8 @@ import com.bootcamp.entities.DTO.AlunoDTO;
 import com.bootcamp.services.AlunoService;
 import com.bootcamp.services.exceptions.DatabaseException;
 import com.bootcamp.services.exceptions.ResourceNotFoundException;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/aluno")
@@ -45,16 +40,16 @@ public class AlunoResource {
 
 	// ----------------------------------------------------------------------------
 	@GetMapping
-	public ResponseEntity<List<Aluno>> findAll() {
+	public ResponseEntity<List<Aluno>> findAll(@RequestParam (value = ("dataDeNascimento"), required = false) String dataDeNascimento) {
 
-		List<Aluno> listaAluno = alunoService.findAll();
+		List<Aluno> listaAluno = alunoService.findAll(dataDeNascimento);
 
 		return ResponseEntity.ok().body(listaAluno);
 	}
 
 	// ----------------------------------------------------------------------------
 	@PostMapping
-	public ResponseEntity<Aluno> insert(@RequestBody AlunoDTO obj) {
+	public ResponseEntity<Aluno> insert(@Valid @RequestBody AlunoDTO obj) {
 		Aluno aluno = alunoService.insert(obj);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(aluno.getId()).toUri();
@@ -92,5 +87,6 @@ public class AlunoResource {
 	public List<AvaliacaoFisica> getAllAvaliacaoFisica(@PathVariable Long id){
 		return avaliacaoFisicaService.getAllAvaliacaoFisica(id);
 	}
+
 
 }

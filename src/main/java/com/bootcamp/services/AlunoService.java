@@ -1,11 +1,14 @@
 package com.bootcamp.services;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
+import com.bootcamp.utils.JavaTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -36,8 +39,14 @@ public class AlunoService {
 		return obj.orElseThrow(()-> new ResourceNotFoundException(id));
 	}
 	//----------------------------------------------------------------------------
-	public List<Aluno> findAll(){
-		return alunoRepository.findAll();
+	public List<Aluno> findAll(String getDataDeNascimento){
+		if(getDataDeNascimento == null){
+			return alunoRepository.findAll();
+		}else {
+			LocalDate localDate = LocalDate.parse(getDataDeNascimento, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+			return alunoRepository.findByDataDeNascimento(localDate);
+		}
+
 	}
 	
 	
@@ -81,6 +90,7 @@ public class AlunoService {
 		
 	
 	}
+
 
 	private void updateData(Aluno entity, Aluno obj) {
 		entity.setName(obj.getName());

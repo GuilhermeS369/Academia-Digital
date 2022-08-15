@@ -17,10 +17,16 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+@Getter
+@Setter
 @ToString
 @Entity
 @Table(name = "tb_aluno")
@@ -42,88 +48,5 @@ public class Aluno {
 	@JsonIgnore
 	private List<AvaliacaoFisica> avaliacoesFisica = new ArrayList<>();
 
-	
-	public Aluno() {
-		
-	}
-	public Aluno(Long id, String name, String cpf, String bairro, LocalDate dataDeNascimento) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.cpf = cpf;
-		this.bairro = bairro;
-		this.dataDeNascimento = dataDeNascimento;
-		
-	}
-	
-	public Aluno (String name, String cpf, String bairro, LocalDate dataDeNascimento) {
-		
-		this.name = name;
-		this.cpf = cpf;
-		this.bairro = bairro;
-		this.dataDeNascimento = dataDeNascimento;
-		
-	}
-
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getCpf() {
-		return cpf;
-	}
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-	public String getBairro() {
-		return bairro;
-	}
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-	public LocalDate getDataDeNascimento() {
-		return dataDeNascimento;
-	}
-	public void setDataDeNascimento(LocalDate dataDeNascimento) {
-		this.dataDeNascimento = dataDeNascimento;
-	}
-	public List<AvaliacaoFisica> getAvaliacoesFisica() {
-		return avaliacoesFisica;
-	}
-	public void setAvaliacoesFisica(List<AvaliacaoFisica> avaliacoesFisica) {
-		this.avaliacoesFisica = avaliacoesFisica;
-	}
-	
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Aluno other = (Aluno) obj;
-		return Objects.equals(id, other.id);
-	}
-
-
-	
-
-	
-	
-	
 	
 }

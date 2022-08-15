@@ -1,5 +1,7 @@
 package com.bootcamp.entities;
 
+import lombok.*;
+
 import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
@@ -13,6 +15,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_matricula")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
 public class Matricula {
 	
 	@Id
@@ -24,42 +32,5 @@ public class Matricula {
 	private Aluno aluno;
 	
 	private LocalDateTime dataDaMatricula;
-	
-	public Matricula() {
-		
-	}
-	
-	public Matricula(Long id, Aluno aluno, LocalDateTime dataDaMatricula) {
-		super();
-		this.id = id;
-		this.aluno = aluno;
-		this.dataDaMatricula = dataDaMatricula;
-	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Aluno getAluno() {
-		return aluno;
-	}
-
-	public void setAluno(Aluno aluno) {
-		this.aluno = aluno;
-	}
-
-	public LocalDateTime getDataDaMatricula() {
-		return dataDaMatricula;
-	}
-
-	public void setDataDaMatricula(LocalDateTime dataDaMatricula) {
-		this.dataDaMatricula = dataDaMatricula;
-	}
-	
-	
-	
 }
